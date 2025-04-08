@@ -104,3 +104,56 @@ Having high code coverage does not automatically guarantee high code quality. It
   - **Readability** and **maintainability** through detection of **code smells**.
   - **Bugs** and **security issues** through **static code analysis**.
 - It integrates easily with CI/CD pipelines, providing ongoing checks for every code commit to keep the codebase clean, secure, and efficient.
+
+
+#################################################################################################
+
+SAST (Static Application Security Testing) and DAST (Dynamic Application Security Testing) are both types of security testing, but they differ in how and when they test applications. Here's a breakdown of their differences:
+
+### 1. **SAST (Static Application Security Testing)**
+   - **What it is:** SAST analyzes the source code, bytecode, or binaries of an application **without running** it. It looks at the structure of the code to identify vulnerabilities, such as insecure coding practices or potential security flaws.
+   - **When it's used:** SAST is typically performed during the **development phase** before the application is deployed. It can be used as soon as the source code is available.
+   - **How it works:** It scans the application's codebase (including files, scripts, and libraries) for vulnerabilities like SQL injection, cross-site scripting (XSS), buffer overflows, etc., and provides recommendations for improving security.
+   - **Example:** Imagine a developer writes an application that stores sensitive customer data in a database. SAST would analyze the code to check for things like improper data validation or lack of encryption, even before the app is run.
+   
+   **Pros:**
+   - Can be done early in development.
+   - Detects security issues in code before deployment.
+   - Helps improve code quality.
+
+   **Cons:**
+   - May result in false positives, as it can't determine the context in which the code will run.
+   - Doesn't catch runtime or deployment-related issues.
+
+---
+
+### 2. **DAST (Dynamic Application Security Testing)**
+   - **What it is:** DAST tests a running application, typically from the perspective of an attacker. It doesn't have access to the source code but simulates attacks on the deployed application, checking for vulnerabilities that can be exploited at runtime.
+   - **When it's used:** DAST is generally performed during the **staging or production phase**, once the application is running in an environment (e.g., on a server).
+   - **How it works:** It interacts with the application through its user interface (UI) and sends various inputs to test for security weaknesses, such as incorrect error handling or exposed data, by simulating real-world attacks like SQL injection or cross-site scripting (XSS).
+   - **Example:** After deploying a web application, DAST tools might try to inject malicious SQL queries through form fields on the website or attempt cross-site scripting (XSS) via user inputs to see if the app is vulnerable to those attacks.
+   
+   **Pros:**
+   - It simulates real-world attack scenarios.
+   - Can identify runtime and deployment-related issues.
+   - Doesn’t require access to the source code.
+
+   **Cons:**
+   - Limited to finding vulnerabilities that can be exploited through the UI.
+   - May miss issues that are only visible in the code or are deeper in the app architecture.
+
+---
+
+### Example to Compare:
+
+Let’s say you're building a web application for managing user profiles:
+
+- **SAST**: While the code is still being written, a SAST tool scans the source code and flags issues such as missing input validation, unsafe handling of passwords, or improper session management (like storing passwords in plain text in the database).
+  
+- **DAST**: After deploying the app, a DAST tool tests the live application by simulating attacks on the login page, trying things like brute-force login attempts or injecting SQL commands into the login form to see if it can exploit any vulnerabilities in the running system.
+
+### In Summary:
+- **SAST** checks the **code** (before running the app).
+- **DAST** checks the **running application** (during or after deployment).
+
+Both are crucial for a comprehensive application security strategy.
